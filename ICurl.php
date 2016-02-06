@@ -7,10 +7,10 @@ interface ICurl {
 	const PUT_REQUEST   = 2;
 	const PATCH_REQUEST = 3;
 
-	public function sendRequest();
+	public function sendRequest($url);
 
-	public function sendGetRequest();
-	public function sendPostRequest();
+	public function sendGetRequest($url);
+	public function sendPostRequest($url, array $params = array());
 	public function sendPutRequest();
 	public function sendPatchRequest();
 

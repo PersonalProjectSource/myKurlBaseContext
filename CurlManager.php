@@ -4,83 +4,59 @@ require_once('CurlBaseContext.php');
 
 Class CurlManager extends CurlBaseContext {
 
-	private $curlId;
-	private $curlResource;
-	private $curlOptions;
-	private $url;
-
-	public static $curlsTab = ['curl1Index', 'curlTest'];
-
-	public function __construct() {
-		$this->curlResource = curl_init();
-		echo "Construction de l'id \n";
-		$this->curlId = $this->createUniqId();
-		// pour le mode bouchon
-		$this->debugConstructor();
-	}
-
-	// public function test() {
-	// 	$ch = curl_init();
-	// 	curl_setopt($ch, CURLOPT_URL, 'https://www.google.fr/?gfe_rd=cr&ei=Bs61VoP6DvDt8wfbwrHoDw');
-	// 	// curl_setopt($ch, CURLOPT_URL, 'https://openid.etna-alternance.net/?referer=https%3A%2F%2Fintra.etna-alternance.net');
-	// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	// 	$res = curl_exec($ch);
-
-	// 	// $pattern = '/\<form .* \</form\>/';
-	// 	// $pattern = '#<a.* href="(.+)">(.+)</.*>#';
-	// 	$pattern = '#<a.* href="(.+)">.+</a>#i';
-	// 	preg_match_all($pattern, $res, $matches);
-	// 	// echo($res);
-	// 	var_dump($matches[1]);
-	// }
-
+	const MODE_DEBUG = true;
 
 	/**
-	*
+	*	Effectue une requete GET.
+	*	@Return : Le contenu de la page ciblée via l'url
 	*/
-	public function sendGetRequest() {
+	public function sendGetRequest($url) {
+		echo "send du get\n";
+		$options = array(
+	      CURLOPT_URL            => $url, // Url cible (l'url la page que vous voulez télécharger)
+	      CURLOPT_RETURNTRANSFER => true, // Retourner le contenu téléchargé dans une chaine (au lieu de l'afficher directement)
+	      CURLOPT_NOBODY 		 => false,
+	      CURLOPT_HEADER         => false // Ne pas inclure l'entête de réponse du serveur dans la chaine retournée
+		);
+		$response = $this->sendRequest($options, self::MODE_DEBUG);
 
+		return $response;
 	}
 
 	/**
-	*
+	*	Effectue une requete POST.
+	* 	@Return : Le contenu de la réponse
 	*/
-	public function sendPostRequest() {
+	public function sendPostRequest($url, array $params = array()) {
+		echo "Send post request\n";
+		$options = array(
+	      CURLOPT_URL        => $url, // Url cible (l'url la page que vous voulez télécharger)
+	      CURLOPT_POST       => 1, // Retourner le contenu téléchargé dans une chaine (au lieu de l'afficher directement)
+	      CURLOPT_POSTFIELDS => $params
+		);
+		$response = $this->sendRequest($options, self::MODE_DEBUG);
 
+		return $response;
 	}
 
 	/**
 	*
 	*/
 	public function sendPutRequest() {
-
+		echo "send du put\n";
 	}
 
-	private function createUniqId() {
-		// Verification du tableau des id curls
-		// S'il n'est pas vide on prendra le dernier indice -1 pour l'affection du l'id.
-		if (count(self::$curlsTab) > 0) {
-			$this->curlId = count(self::$curlsTab) +1;
-			// echo "test attribut de class : ". $this->curlId."\n";
-		}
-
-		return $this->curlId;
-	}
-
-
-	private function addCurlOptions($opt) {
-		echo "ajout d'une option\n";
-	}
-
-
-	private function deleteCurlOptions($opt) {
-		echo "suppression d'une option\n";
+	/**
+	*
+	*/
+	public function sendPatchRequest() {
+		echo "send du patch\n";
 	}
 
 	/**
 	*	Display all curl caracterisitiques.
 	*/
-	public function showCurlResource() {
+	public function introduce() {
 		$displayed = "";
 		$displayed .= "id_ressource : ".$this->curlId."\n";
 		if (!empty($this->curlOptions)) {
@@ -92,16 +68,5 @@ Class CurlManager extends CurlBaseContext {
 			$displayed .= "No options\n";
 		}
 		echo $displayed."\n";
-	}
-
-	public function debugConstructor() {
-		$this->url = "http://myscope.local/app_dev.php";
-		// for test.
-		$this->curlOptions = array(
-	      CURLOPT_URL            => $this->url, // Url cible (l'url la page que vous voulez télécharger)
-	      CURLOPT_RETURNTRANSFER => true, // Retourner le contenu téléchargé dans une chaine (au lieu de l'afficher directement)
-	      CURLOPT_NOBODY 		 => false,
-	      CURLOPT_HEADER         => false // Ne pas inclure l'entête de réponse du serveur dans la chaine retournée
-		);
 	}
 }
