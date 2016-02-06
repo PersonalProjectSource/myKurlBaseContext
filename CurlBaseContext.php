@@ -1,12 +1,16 @@
 <?php
 
-require_once('Interface/ICurl.php');
+require_once('ICurl.php');
 
 abstract class CurlBaseContext implements ICurl {
 
 	public function testAbs() {
 		echo "abs connection ok  !\n";
 	}
+
+	public function introduce() {
+		echo "introduce CurlContext\n";
+	}	
 
 	/**
 	*	Gere la comunication Curl
