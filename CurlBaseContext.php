@@ -83,10 +83,10 @@ abstract class CurlBaseContext implements ICurl {
 		$this->url = "http://myscope.local/app_dev.php";
 		// for test.
 		$this->curlOptions = array(
-	      CURLOPT_URL            => $this->url, // Url cible (l'url la page que vous voulez télécharger)
-	      CURLOPT_RETURNTRANSFER => true, // Retourner le contenu téléchargé dans une chaine (au lieu de l'afficher directement)
+	      CURLOPT_URL            => $this->url, 
+	      CURLOPT_RETURNTRANSFER => true, 
 	      CURLOPT_NOBODY 		 => false,
-	      CURLOPT_HEADER         => false // Ne pas inclure l'entête de réponse du serveur dans la chaine retournée
+	      CURLOPT_HEADER         => false
 		);
 	}
 

@@ -13,10 +13,10 @@ Class CurlManager extends CurlBaseContext {
 	public function sendGetRequest($url) {
 		echo "send du get\n";
 		$options = array(
-	      CURLOPT_URL            => $url, // Url cible (l'url la page que vous voulez télécharger)
-	      CURLOPT_RETURNTRANSFER => true, // Retourner le contenu téléchargé dans une chaine (au lieu de l'afficher directement)
+	      CURLOPT_URL            => $url, 
+	      CURLOPT_RETURNTRANSFER => true, 
 	      CURLOPT_NOBODY 		 => false,
-	      CURLOPT_HEADER         => false // Ne pas inclure l'entête de réponse du serveur dans la chaine retournée
+	      CURLOPT_HEADER         => false 
 		);
 		$response = $this->sendRequest($options, self::MODE_DEBUG);
 
@@ -30,8 +30,8 @@ Class CurlManager extends CurlBaseContext {
 	public function sendPostRequest($url, array $params = array()) {
 		echo "Send post request\n";
 		$options = array(
-	      CURLOPT_URL        => $url, // Url cible (l'url la page que vous voulez télécharger)
-	      CURLOPT_POST       => 1, // Retourner le contenu téléchargé dans une chaine (au lieu de l'afficher directement)
+	      CURLOPT_URL        => $url, 
+	      CURLOPT_POST       => 1,
 	      CURLOPT_POSTFIELDS => $params
 		);
 		$response = $this->sendRequest($options, self::MODE_DEBUG);
@@ -60,7 +60,6 @@ Class CurlManager extends CurlBaseContext {
 		$displayed = "";
 		$displayed .= "id_ressource : ".$this->curlId."\n";
 		if (!empty($this->curlOptions)) {
-			echo "pass-----";
 			foreach ($this->curlOptions as $keyOpt => $option) {
 				$displayed .= $keyOpt." => ".$option."\n";
 			}
