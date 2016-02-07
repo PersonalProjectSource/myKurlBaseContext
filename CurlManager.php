@@ -31,7 +31,7 @@ Class CurlManager extends CurlBaseContext {
 		echo "Send post request\n";
 		$options = array(
 	      CURLOPT_URL        => $url, 
-	      CURLOPT_POST       => 1,
+	      CURLOPT_POST       => true,
 	      CURLOPT_POSTFIELDS => $params
 		);
 		$response = $this->sendRequest($options, self::MODE_DEBUG);
@@ -51,21 +51,5 @@ Class CurlManager extends CurlBaseContext {
 	*/
 	public function sendPatchRequest() {
 		echo "send du patch\n";
-	}
-
-	/**
-	*	Display all curl caracterisitiques.
-	*/
-	public function introduce() {
-		$displayed = "";
-		$displayed .= "id_ressource : ".$this->curlId."\n";
-		if (!empty($this->curlOptions)) {
-			foreach ($this->curlOptions as $keyOpt => $option) {
-				$displayed .= $keyOpt." => ".$option."\n";
-			}
-		} else {
-			$displayed .= "No options\n";
-		}
-		echo $displayed."\n";
 	}
 }

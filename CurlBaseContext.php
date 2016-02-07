@@ -24,13 +24,21 @@ abstract class CurlBaseContext implements ICurl {
 		$this->debugConstructor();
 	}
 
-	public function testAbs() {
-		echo "abs connection ok  !\n";
-	}
-
+	/**
+	*	Display all curl caracterisitiques.
+	*/
 	public function introduce() {
-		echo "introduce CurlContext\n";
-	}	
+		$displayed = "";
+		$displayed .= "id_ressource : ".$this->curlId."\n";
+		if (!empty($this->curlOptions)) {
+			foreach ($this->curlOptions as $keyOpt => $option) {
+				$displayed .= $keyOpt." => ".$option."\n";
+			}
+		} else {
+			$displayed .= "No options\n";
+		}
+		echo $displayed."\n";
+	}
 
 	/**
 	*	Gere la comunication Curl
